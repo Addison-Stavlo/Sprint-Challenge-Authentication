@@ -10,7 +10,7 @@ import Jokes from "./jokes/jokes";
 
 import { LogIn } from "styled-icons/feather/LogIn";
 import { FileSignature } from "styled-icons/fa-solid/FileSignature";
-import { Users as UsersIcon } from "styled-icons/fa-solid/Users";
+import { BookOpen } from "styled-icons/fa-solid/BookOpen";
 
 class App extends Component {
   state = {
@@ -54,7 +54,7 @@ class App extends Component {
             </NavLink>
             &nbsp;&nbsp;
             <NavLink to="/jokes">
-              <StyledUsersIcon />
+              <JokesIcon />
               <p>Jokes</p>
             </NavLink>
           </nav>
@@ -126,7 +126,7 @@ const LogInIcon = styled(LogIn)`
 const SignUpIcon = styled(FileSignature)`
   color: lightblue;
 `;
-const StyledUsersIcon = styled(UsersIcon)`
+const JokesIcon = styled(BookOpen)`
   color: lightblue;
   height: 50px;
 `;
