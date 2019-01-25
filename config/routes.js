@@ -1,7 +1,7 @@
 const axios = require("axios");
 const db = require("../database/dbConfig");
 const bcrypt = require("bcryptjs");
-const { authenticate } = require("../auth/authenticate");
+const { authenticate, generateToken } = require("../auth/authenticate");
 
 module.exports = server => {
   server.post("/api/register", register);
@@ -16,22 +16,27 @@ function register(req, res) {
 
   db("users")
     .insert(userInfo)
-    .then(ids => res.status(201).json(ids))
+    .then(ids => {
+      db("users")
+        .where({ username: userInfo.username })
+        .first()
+        .then(user => {
+          let token = generateToken(user);
+          res.status(201).json({ message: `user created`, token });
+        });
+    })
     .catch(err => res.status(500).json({ error: err }));
 }
 
 function login(req, res) {
   // implement user login
-
   db("users")
     .where({ username: req.body.username })
     .first()
     .then(user => {
       if (user && bcrypt.compareSync(req.body.password, user.password)) {
-        //make a token
-
-        //send the token
-        res.status(200).json({ message: `welcome ${user.username}` });
+        let token = generateToken(user);
+        res.status(200).json({ message: `welcome ${user.username}`, token });
       } else {
         res.status(401).json({ message: `YOU SHALL NOT... pass...` });
       }
