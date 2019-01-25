@@ -34,7 +34,7 @@ function generateToken(user) {
     username: user.username
   };
 
-  const secret = "my super non-secret secret";
+  const secret = jwtKey;
 
   const options = {
     expiresIn: "60m"
