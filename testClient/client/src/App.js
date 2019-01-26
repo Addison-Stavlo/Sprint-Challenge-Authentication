@@ -19,6 +19,7 @@ class App extends Component {
 
   componentDidMount() {
     let token = localStorage.getItem("token");
+    console.log("token", token);
     if (token) {
       axios
         .get(`${process.env.REACT_APP_API_URL}/api/jokes`, {
@@ -28,8 +29,12 @@ class App extends Component {
           this.setState({ signedIn: true });
           this.props.history.push("/jokes");
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          //when token is not valid
+          this.props.history.push("/signin");
+        });
     } else {
+      //when there is no token
       this.props.history.push("/signin");
     }
   }

@@ -1,6 +1,6 @@
 1. What is the purpose of using _sessions_?
 
-   sessions are used to keep track of a cookie's validity. a cookie is valid only as long as its session is active, once the session ends, generally by expiring via a time constraint, the cookie is no longer valid.
+   sessions are used to keep track of a cookie's validity. a cookie is valid only as long as its session is active, once the session ends, generally by expiring via a time constraint, the cookie is no longer valid. they are used to save state across requests.
 
 1. What does bcrypt do to help us store passwords in a secure manner.
 
